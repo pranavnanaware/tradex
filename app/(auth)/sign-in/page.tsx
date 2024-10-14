@@ -24,14 +24,14 @@ interface AuthFormData {
 }
 
 export default function AuthPage() {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false); // State to toggle between sign up and sign in
   const [formData, setFormData] = useState<AuthFormData>({
     email: "",
     password: "",
     name: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  }); // State to manage form data
+  const [loading, setLoading] = useState(false); // State to manage loading state
+  const router = useRouter(); // Next.js router for navigation
 
   // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +49,7 @@ export default function AuthPage() {
 
     const endpoint = isSignUp
       ? "http://127.0.0.1:5000/api/register"
-      : "http://127.0.0.1:5000/api/login";
+      : "http://127.0.0.1:5000/api/login"; // Determine endpoint based on sign up or sign in
 
     const payload = isSignUp
       ? {
@@ -60,7 +60,7 @@ export default function AuthPage() {
       : {
           email: formData.email,
           password: formData.password,
-        };
+        }; // Prepare payload based on sign up or sign in
 
     try {
       console.log("payload", JSON.stringify(payload));
@@ -79,7 +79,7 @@ export default function AuthPage() {
       if (res.ok) {
         if (isSignUp) {
           toast.success("Registration successful! Please log in.");
-          setIsSignUp(false);
+          setIsSignUp(false); // Switch to sign in after successful registration
           setFormData({
             email: "",
             password: "",
@@ -87,16 +87,16 @@ export default function AuthPage() {
           });
         } else {
           toast.success("Login successful!");
-          await router.push("/home");
+          await router.push("/home"); // Navigate to home page after successful login
         }
       } else {
-        toast.error(data.error || "An error occurred.");
+        toast.error(data.error || "An error occurred."); // Show error message
       }
     } catch (error) {
       console.error("Error during authentication:", error);
-      toast.error("An unexpected error occurred.");
+      toast.error("An unexpected error occurred."); // Show unexpected error message
     } finally {
-      setLoading(false);
+      setLoading(false); // Reset loading state
     }
   };
 

@@ -14,11 +14,13 @@ import { Button } from "@/components/ui/button";
 import { usePortfolio } from "@/hooks/usePortfolio";
 
 export default function StockPortfolioList() {
-  // **Hook is now inside the component**
+  // Fetch portfolio data using a custom hook
   const { data, error, isLoading, isError } = usePortfolio();
 
+  // State to manage which stocks are expanded
   const [expandedStocks, setExpandedStocks] = useState<string[]>([]);
 
+  // Toggle the expanded state of a stock
   const toggleExpand = (stockTicker: string) => {
     setExpandedStocks((prev) =>
       prev.includes(stockTicker)
@@ -27,6 +29,7 @@ export default function StockPortfolioList() {
     );
   };
 
+  // Format a number as currency
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -34,10 +37,12 @@ export default function StockPortfolioList() {
     }).format(value);
   };
 
+  // Calculate the total value of shares
   const calculateTotalValue = (shares: number, currentPrice: number) => {
     return formatCurrency(shares * currentPrice);
   };
 
+  // Calculate profit or loss
   const calculateProfitLoss = (
     shares: number,
     averagePrice: number,
@@ -51,6 +56,7 @@ export default function StockPortfolioList() {
     )}%)`;
   };
 
+  // Show loading state
   if (isLoading) {
     return (
       <div className="container mx-auto p-4">
@@ -60,6 +66,7 @@ export default function StockPortfolioList() {
     );
   }
 
+  // Show error state
   if (isError) {
     return (
       <div className="container mx-auto p-4">
@@ -69,6 +76,7 @@ export default function StockPortfolioList() {
     );
   }
 
+  // Destructure data from the API response
   const { portfolio, cash_balance, squared_off_postions } = data;
 
   return (
@@ -107,8 +115,6 @@ export default function StockPortfolioList() {
                   )}
                 </Button>
               </CardTitle>
-              {/* Remove or handle stock.name appropriately */}
-              {/* <CardDescription>{stock.name}</CardDescription> */}
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">

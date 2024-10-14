@@ -3,13 +3,11 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { TickerSearch } from "./ui/tickersearch";
-import Chart from "./tradingview/chart";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "./ui/resizable";
-import Analysis from "./tradingview/analysis";
 import Financials from "./Financials";
 import { Card } from "./ui/card";
 import { useFinancials } from "@/hooks/useFinancialData";
@@ -23,23 +21,23 @@ const Canvas = ({
   value: string;
   onSelect: (value: string) => void;
 }) => {
-  const [symbol, setSymbol] = useState(value || "NVDA");
+  const [symbol, setSymbol] = useState(value || "NVDA"); // Initialize state with the provided value or default to "NVDA"
 
   const {
     data: tickerData,
     error: tickerError,
     isLoading: isTickerLoading,
-  } = useFinancials(symbol);
+  } = useFinancials(symbol); // Fetch financial data for the selected symbol
 
   const handleSelect = (value: string) => {
-    setSymbol(value);
-    onSelect(value);
+    setSymbol(value); // Update the symbol state
+    onSelect(value); // Call the onSelect callback with the new value
   };
 
   if (isTickerLoading) {
     return (
       <div className="flex items-center justify-center h-full">Loading...</div>
-    );
+    ); // Show loading state
   }
 
   if (tickerError) {
@@ -47,13 +45,14 @@ const Canvas = ({
       <div className="flex items-center justify-center h-full">
         Error: {(tickerError as Error).message}
       </div>
-    );
+    ); // Show error state
   }
 
   return (
     <main className="flex flex-col items-center justify-center text-white h-full">
       <div className="flex h-28 border w-full items-center p-4 justify-center ">
-        <TickerSearch value={symbol} onSelect={handleSelect} />
+        <TickerSearch value={symbol} onSelect={handleSelect} />{" "}
+        {/* Ticker search input */}
       </div>
       <div className="flex w-full p-4">
         {tickerData && (
@@ -72,9 +71,9 @@ const Canvas = ({
             industry={tickerData.industry}
             eps={tickerData.forwardEps}
             marketCap={tickerData.marketCap.toLocaleString()}
-            divYield={tickerData.fiveYearAvgDividendYield}
+            divYield={tickerData.fiveYearAvgDividendYield || 0.0}
             pe={tickerData.trailingPE}
-          />
+          /> // Display stock card with ticker data
         )}
       </div>
       <ResizablePanelGroup direction="horizontal" className="h-full">
@@ -90,11 +89,13 @@ const Canvas = ({
               { name: "52 Week Low", price: tickerData.fiftyTwoWeekLow },
               { name: "52 Week High", price: tickerData.fiftyTwoWeekHigh },
             ]}
-          />
+          />{" "}
+          {/* Display performance chart with ticker data */}
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel defaultSize={45} className="h-full p-4">
-          {tickerData && <Financials financialData={tickerData} />}
+          {tickerData && <Financials financialData={tickerData} />}{" "}
+          {/* Display financials panel */}
         </ResizablePanel>
       </ResizablePanelGroup>
     </main>

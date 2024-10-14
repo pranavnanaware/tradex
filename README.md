@@ -1,37 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trade X
 
-## Getting Started
+This project is a **stock trading application** built using Next.js. It provides functionalities to view stock tickers, buy and sell stocks, and manage a portfolio. The project integrates several UI libraries for building a dynamic and responsive interface, along with essential packages for authentication, state management, and more.
 
-First, run the development server:
+**Important:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+If you encounter any issues with **CORS** or **cookies**, particularly when using Safari or Incognito mode, please switch to **Google Chrome** for a smoother experience. Safari/Incognito modes may have restrictions that can cause issues with CORS or cookie handling in this application.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Stock Trading**: Query specific stock tickers, buy and sell stocks, and view a portfolio.
+- **Responsive UI**: Built with Tailwind CSS and ShadCN UI components for a modern and responsive user interface.
+- **Theming**: Support for light and dark themes using `next-themes`.
+- **State Management**: Utilizes `@tanstack/react-query` for server-side data fetching and caching.
+- **Charts**: Integrated with Recharts to visualize stock data.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
 
-## Learn More
+- **Next.js**: Framework for building the frontend, with server-side rendering and API routes.
+- **React**: Frontend library for building user interfaces.
+- **ShadCN UI**: A set of accessible, unstyled components used for the dialog, popover, select, and more.
+- **Tanstack React Query**: For server-side state management and caching.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **TypeScript**: Strongly typed JavaScript for better code quality and maintainability.
+- **SQLAlchemy + TimescaleDB**: Backend for managing stocks, portfolios, and transactions (used in the Flask API).
+- **Recharts**: Library for building charts and visualizing stock performance.
 
-To learn more about Next.js, take a look at the following resources:
+## Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/pranavnanaware/tradex.git
+   cd stock
+   ```
 
-## Deploy on Vercel
+2. Install dependencies:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# tradex
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+
+   ```bash
+   npm run build
+   ```
+
+5. Lint the project:
+   ```bash
+   npm run lint
+   ```
+
+## Scripts
+
+- **`npm run dev`**: Starts the development server.
+- **`npm run build`**: Builds the project for production.
+- **`npm run start`**: Starts the production build.
+- **`npm run lint`**: Lints the project for potential issues.
+
+## Dependencies
+
+- **@radix-ui/react-dialog**: Accessible dialog component.
+- **@radix-ui/react-icons**: Icon set for the application.
+- **@tanstack/react-query**: Manages fetching, caching, and syncing server data.
+- **next**: Framework for server-side rendering, API routes, and static site generation.
+- **tailwindcss**: Utility-first CSS framework for styling.
+- **typescript**: Strongly typed JavaScript for building better code.
+- **jsonwebtoken**: Library for user authentication using JWT tokens.
+
+## License
+
+This project is licensed under the MIT License. Feel free to use, modify, and distribute the code.
+
+---
+
+If you encounter any issues or have suggestions for improvements, please open an issue in the repository.

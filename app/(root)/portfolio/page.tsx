@@ -81,9 +81,11 @@ interface PortfolioData {
   stockPerformance: StockPerformance[];
 }
 
+// Colors for the pie chart
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
 export default function PortfolioPage() {
+  // State to hold portfolio data
   const [portfolioData, setPortfolioData] = useState<PortfolioData>({
     totalValue: 0,
     totalStocks: 0,
@@ -95,17 +97,21 @@ export default function PortfolioPage() {
     stockPerformance: [],
   });
 
+  // Fetch analytics data using custom hook
   const { data, isLoading, isError, isSuccess } = useAnalytics();
 
+  // Update portfolio data when analytics data is successfully fetched
   useEffect(() => {
     if (isSuccess) {
       setPortfolioData(data);
     }
   }, [data]);
+
   return (
     <div className="container mx-auto p-4 ">
       <h1 className="text-3xl font-bold mb-6">Stock Portfolio</h1>
 
+      {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <Card className="bg-transparent shadow-black">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 ">
@@ -122,7 +128,9 @@ export default function PortfolioPage() {
         </Card>
         <Card className="bg-transparent shadow-black">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Stocks</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Current Holdings
+            </CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -169,6 +177,7 @@ export default function PortfolioPage() {
         </Card>
       </div>
 
+      {/* Performance Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <Card className="bg-transparent shadow-black">
           <CardHeader>
@@ -236,6 +245,7 @@ export default function PortfolioPage() {
         </Card>
       </div>
 
+      {/* Recent Transactions and Portfolio Composition */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="bg-transparent">
           <CardHeader>

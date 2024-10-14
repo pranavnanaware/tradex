@@ -102,13 +102,7 @@ export function TickerSearch({
         </Button>
       </PopoverTrigger>
       <div className="mx-2"></div>
-      <Button
-        className="h-12 font-semibold text-sm"
-        onClick={() => router.push(`/${inputValue}`)}
-        disabled={!inputValue}
-      >
-        BUY / SELL
-      </Button>
+
       <PopoverContent className="w-[800px] p-0">
         <Command>
           <CommandInput

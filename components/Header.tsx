@@ -12,18 +12,22 @@ import { useLogout } from "@/hooks/useLogout";
 export function Header() {
   const router = useRouter();
 
+  // Fetch user data
   const { data, isLoading, isError, isSuccess } = useFetchUser();
 
+  // Logout mutation hook
   const {
     mutate: logoutMutate,
     isError: isLogoutError,
     error: logoutError,
   } = useLogout();
 
+  // Redirect to sign-in page if there's an error fetching user data
   if (isError) {
     router.push("/sign-in");
   }
 
+  // Handle logout functionality
   const handleLogout = () => {
     logoutMutate(undefined, {
       onSuccess: (data) => {
